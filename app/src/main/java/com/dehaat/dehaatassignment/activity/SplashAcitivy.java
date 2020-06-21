@@ -15,14 +15,18 @@ public class SplashAcitivy extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_acitivy);
 
-        if(AuthUtils.INSTANCE.isUserLoggedIn()){
-            AuthUtils.INSTANCE.refreshSession();
-            launchActivity(MainActivity.class);
-        }else {
-            launchActivity(LoginActivity.class);
-        }
+        findViewById(R.id.logo).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(AuthUtils.INSTANCE.isUserLoggedIn(getApplicationContext())){
+                    AuthUtils.INSTANCE.refreshSession();
+                    launchActivity(MainActivity.class);
+                }else {
+                    launchActivity(LoginActivity.class);
+                }
+                finish();
+            }
+        },2000);
     }
-
-
 
 }

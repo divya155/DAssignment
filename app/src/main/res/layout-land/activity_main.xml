@@ -7,18 +7,18 @@
     tools:context=".activity.MainActivity">
 
 
-    <fragment
-        android:id="@+id/fragment1"
-        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+<!--    <fragment-->
+<!--        android:id="@+id/fragment1"-->
+<!--        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
 
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+<!--    <fragment-->
+<!--        android:id="@+id/fragment2"-->
+<!--        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="match_parent"-->
 
-        android:layout_weight="1" />
+<!--        android:layout_weight="1" />-->
 </LinearLayout>

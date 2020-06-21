@@ -2,14 +2,12 @@ package com.dehaat.dehaatassignment.activity
 
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
 
 import com.dehaat.dehaatassignment.R
 import com.dehaat.dehaatassignment.util.AuthUtils
 
-import dagger.android.support.DaggerAppCompatActivity
 import java.util.regex.Pattern
 
 class LoginActivity : BaseActivity() {
@@ -32,13 +30,15 @@ class LoginActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            AuthUtils.setLoggedInPreference(applicationContext,true);
             launchActivity(MainActivity::class.java)
+            finish()
         }
     }
 
     private fun validatePassword(etPassword: EditText): Boolean {
         val pattern = Pattern.compile(AuthUtils.passwordRegex)
-        val isMatch = pattern.matcher(etPassword.toString()).find()
+        val isMatch = pattern.matcher(etPassword.text.toString()).find()
         if(!isMatch) {
             etPassword.error = "Password must be eight characters or longer and should contain at least\n1 lowercase alphabetical character\n1 uppercase alphabetical character\n1 numeric character\n1 special char {! @ # $ % ^ & *}"
         }
@@ -47,7 +47,7 @@ class LoginActivity : BaseActivity() {
 
     private fun validateEmail(etEmail: EditText): Boolean {
         val pattern = Pattern.compile(AuthUtils.emailRegex)
-        val isMatch = pattern.matcher(etEmail.toString()).find()
+        val isMatch = pattern.matcher(etEmail.text.toString()).find()
         if(!isMatch) {
             etEmail.error = "Please enter a valid email"
         }
