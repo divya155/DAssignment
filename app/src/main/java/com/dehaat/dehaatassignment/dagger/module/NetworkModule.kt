@@ -25,7 +25,7 @@ class NetworkModule {
             gsonConverterFactory: GsonConverterFactory,
             okHttpClient: OkHttpClient
     ): Retrofit {
-        return Retrofit.Builder().baseUrl("/dehaat/")
+        return Retrofit.Builder().baseUrl("https://www.dehaat.com/")
                 .addConverterFactory(gsonConverterFactory)
                 .client(okHttpClient)
                 .build()
@@ -38,11 +38,6 @@ class NetworkModule {
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
-
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        client.addInterceptor(interceptor)
-
         val mock = MockResponseInterceptor(context)
         client.addInterceptor { chain ->
             chain.proceed(chain.request())

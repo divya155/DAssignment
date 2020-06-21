@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="book"
+            type="com.dehaat.dehaatassignment.datalayer.model.Book" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/bookTitle"
+                style="@style/TextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/price"
+                android:text="@{book.title}"
+                tools:text=" Author Name" />
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/TextList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@{book.price.toString()}"
+                android:textColor="#119eab"
+                android:textStyle="bold"
+                tools:text="Rs. 200" />
+
+
+            <TextView
+                android:id="@+id/publisher"
+                style="@style/TextList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bookTitle"
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:text="@{`Publisher: ` +book.publisher}"
+                tools:text="Publisher: Maple Press" />
+
+            <TextView
+                android:id="@+id/publishDate"
+                style="@style/TextList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/publisher"
+                android:maxLines="3"
+                android:text="@{`Published On: ` + book.published_date}"
+                tools:text="Published On: 01-01-2013" />
+
+            <TextView
+                android:id="@+id/bookDescription"
+                style="@style/TextList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/publishDate"
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:text="@{book.description}"
+                tools:text="William Shakespeare(April 26, 1564 (baptism)–d. April 23, 1616) was an English poet " />
+
+            <TextView
+                android:id="@+id/view_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bookDescription"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:text="View More"
+                android:textColor="#57ced9" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

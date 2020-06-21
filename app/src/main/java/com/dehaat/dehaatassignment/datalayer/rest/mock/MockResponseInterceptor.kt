@@ -1,6 +1,7 @@
 package com.dehaat.dehaatassignment.datalayer.rest.mock
 
 import android.content.Context
+import com.dehaat.dehaatassignment.R
 import okhttp3.*
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -8,8 +9,7 @@ import java.io.InputStream
 import java.net.URLConnection
 import javax.inject.Inject
 
-class MockResponseInterceptor @Inject
-internal constructor(private val context: Context) : Interceptor {
+class MockResponseInterceptor constructor(private val context: Context) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -41,22 +41,24 @@ internal constructor(private val context: Context) : Interceptor {
     @Throws(IOException::class)
     private fun toByteArray(inputStream: InputStream): ByteArray {
         val outStream = ByteArrayOutputStream()
-        val b = ByteArray(4096)
+        val b = ByteArray(14096)
         var n: Int = 0
+        n = inputStream.read(b)
         while (n != -1) {
-            n = inputStream.read(b)
             outStream.write(b, 0, n)
+            n = inputStream.read(b)
         }
         return outStream.toByteArray()
     }
 
     private fun getResourceId(fileName: String): Int {
-        return context.resources.getIdentifier(fileName, "raw", context.packageName)
+
+        return context.resources.getIdentifier(fileName.replace(".json",""), "raw", context.packageName)
     }
 
     private fun getFilename(request: Request): String {
         val requestMethod = request.method()
-        val filename = requestMethod + request.url().url().path
-        return filename.replace("/", "_").replace("-", "_").toLowerCase()
+        val filename = request.url().url().path
+        return filename.replace("/", "").toLowerCase()
     }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="author"
+            type="com.dehaat.dehaatassignment.datalayer.model.Author" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/author_name"
+                style="@style/TextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{author.author_name}"
+                tools:text=" Author Name" />
+
+            <TextView
+                android:id="@+id/author_bio"
+                style="@style/TextList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxLines="3"
+                android:text="@{author.author_bio}"
+                tools:text="William Shakespeare (April 26, 1564 (baptism)–d. April 23, 1616) was an English poet " />
+
+            <TextView
+                android:id="@+id/view_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:text="View More"
+                android:textColor="#57ced9" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

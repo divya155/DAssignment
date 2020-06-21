@@ -6,10 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-<!--    <fragment-->
-<!--        android:id="@+id/fragment"-->
-<!--        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
-
+    <FrameLayout
+        android:id="@+id/authorFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>
