@@ -10,13 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.dehaat.dehaatassignment.R;
-import com.dehaat.dehaatassignment.viewmodel.AuthorListFramentViewModel;
+import com.dehaat.dehaatassignment.viewmodel.AuthorViewModel;
 
 import dagger.android.support.DaggerFragment;
 
 public class AuthorListFrament extends DaggerFragment {
 
-    private AuthorListFramentViewModel mViewModel;
+    private AuthorViewModel mViewModel;
 
     public static AuthorListFrament newInstance() {
         return new AuthorListFrament();
@@ -31,7 +31,7 @@ public class AuthorListFrament extends DaggerFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(AuthorListFramentViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(AuthorViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -1,6 +1,8 @@
 package com.dehaat.dehaatassignment.dagger.module
 
+import android.content.Context
 import com.dehaat.dehaatassignment.datalayer.rest.AppRestClientService
+import com.dehaat.dehaatassignment.datalayer.rest.mock.MockResponseInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+
 @Module
 class NetworkModule {
 
@@ -19,27 +22,35 @@ class NetworkModule {
     @Provides
     @Singleton
     fun providesRetrofit(
-        gsonConverterFactory: GsonConverterFactory,
-        okHttpClient: OkHttpClient
+            gsonConverterFactory: GsonConverterFactory,
+            okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder().baseUrl("/dehaat/")
-            .addConverterFactory(gsonConverterFactory)
-            .client(okHttpClient)
-            .build()
+                .addConverterFactory(gsonConverterFactory)
+                .client(okHttpClient)
+                .build()
     }
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(): OkHttpClient {
+    fun providesOkHttpClient(context: Context): OkHttpClient {
         val client = OkHttpClient.Builder()
-            //  .cache(cache)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-        client.addNetworkInterceptor(interceptor)
+        client.addInterceptor(interceptor)
+
+        val mock = MockResponseInterceptor(context)
+        client.addInterceptor { chain ->
+            chain.proceed(chain.request())
+        }
+        client.addInterceptor(mock)
+
         return client.build()
+
     }
 
 
@@ -54,7 +65,6 @@ class NetworkModule {
     fun providesGsonConverterFactory(gson: Gson): GsonConverterFactory {
         return GsonConverterFactory.create(gson)
     }
-
 
 
     @Singleton

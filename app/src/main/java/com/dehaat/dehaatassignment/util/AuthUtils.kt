@@ -23,6 +23,8 @@ object AuthUtils {
         sharedPreferences.edit().putBoolean(PREF_KEY_LOGGEDIN,isLoggedIn).commit()
     }
 
-    fun refreshSession(){}
+    fun refreshSession(){
+
+    }
 
 }

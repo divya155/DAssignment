@@ -1,7 +1,7 @@
 package com.divya.newsapp.di.builder
 
 import androidx.lifecycle.ViewModel
-import com.dehaat.dehaatassignment.viewmodel.AuthorListFramentViewModel
+import com.dehaat.dehaatassignment.viewmodel.AuthorViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -10,6 +10,6 @@ import dagger.multibindings.IntoMap
 abstract class AppViewModelBuilder {
     @Binds
     @IntoMap
-    @ViewModelKey(AuthorListFramentViewModel::class)
-    abstract fun bindAuthorViewModel(homeViewModel: AuthorListFramentViewModel): ViewModel
+    @ViewModelKey(AuthorViewModel::class)
+    abstract fun bindAuthorViewModel(homeViewModel: AuthorViewModel): ViewModel
 }
