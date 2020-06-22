@@ -1,6 +1,5 @@
 package com.dehaat.dehaatassignment.util
 
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import javax.inject.Inject
@@ -28,9 +27,9 @@ object AuthUtils {
 
     }
     @Inject
-    fun isNetworkConnected(application: Application): Boolean {
+    fun isNetworkConnected(context: Context): Boolean {
         val connectivityManager =
-                application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         connectivityManager?.let {
             val activeNetworkInfo = it.activeNetworkInfo
             return activeNetworkInfo != null && activeNetworkInfo.isConnected

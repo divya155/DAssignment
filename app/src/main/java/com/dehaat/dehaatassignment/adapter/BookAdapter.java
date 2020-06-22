@@ -64,7 +64,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BooksViewHolde
 
         public void bind(Book book){
             binding.setBook(book);
-
+            binding.price.setText("\u20B9 "+book.getPrice());
             if(!TextUtils.isEmpty(book.getDescription())){
                 if(UiUtils.INSTANCE.isTextTooLarge(context,binding.bookDescription,book.getDescription(),MAX_DESCRIPTION_LINES)){
                     binding.bookDescription.setMaxLines(MAX_DESCRIPTION_LINES);

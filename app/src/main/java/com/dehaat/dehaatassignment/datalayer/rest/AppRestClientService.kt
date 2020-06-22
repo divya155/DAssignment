@@ -12,9 +12,6 @@ interface AppRestClientService {
     @GET("get_authors.json")
     fun authors(): Call<AuthorResponse>
 
-    @GET("get_authors.json")
-    fun authorList(): AuthorResponse
-
     @POST("login")
     fun login(): Call<JsonElement>
 

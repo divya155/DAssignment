@@ -23,8 +23,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthorRepository(application: Application,apiHelper: ApiHelper, dbHelper: DbHelper): AuthorRepository {
-        return AuthorRepository(application, apiHelper, dbHelper)
+    fun provideAuthorRepository(application: Context,apiHelper: ApiHelper, dbHelper: DbHelper): AuthorRepository {
+        return AuthorRepository(application,apiHelper, dbHelper)
     }
 
     @Provides

@@ -1,6 +1,7 @@
 package com.dehaat.dehaatassignment.datalayer.repository
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dehaat.dehaatassignment.datalayer.model.Author
@@ -17,7 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class AuthorRepository @Inject constructor(val application: Application, val apiHelper: ApiHelper, val dbHelper: DbHelper) {
+class AuthorRepository @Inject constructor(val application: Context, val apiHelper: ApiHelper, val dbHelper: DbHelper) {
+
 
 
     private val authorsLiveData = MutableLiveData<Resource<List<Author>?>>()
