@@ -3,7 +3,6 @@ package com.dehaat.dehaatassignment.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,18 +14,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dehaat.dehaatassignment.R
 import com.dehaat.dehaatassignment.adapter.AuthorAdapter
+import com.dehaat.dehaatassignment.adapter.AuthorItemInteractionListener
 import com.dehaat.dehaatassignment.datalayer.model.Author
 import com.dehaat.dehaatassignment.datalayer.model.Status
 import com.dehaat.dehaatassignment.viewmodel.AuthorViewModel
 import dagger.android.support.DaggerFragment
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
-class AuthorListFrament : DaggerFragment() {
+class AuthorListFrament : DaggerFragment(), AuthorItemInteractionListener {
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val mViewModel: AuthorViewModel by lazy { ViewModelProviders.of(this, viewModelFactory).get(AuthorViewModel::class.java) }
+
+    private lateinit var mViewModel: AuthorViewModel
 
     private lateinit var progressView: View
     private lateinit var recyclerView: RecyclerView
@@ -36,20 +37,25 @@ class AuthorListFrament : DaggerFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is AuthorItemInteractionListener){
+        if (context is AuthorItemInteractionListener) {
             authorItemInteractionListener = context
-        }else{
+        } else {
             throw IllegalStateException("Activity must implement AuthorItemInteractionListener")
         }
+
+        mViewModel = ViewModelProviders.of(activity!!, viewModelFactory).get(AuthorViewModel::class.java)
+
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.run { inflate(R.layout.author_list_frament_fragment, container, false) }
 
 
+        val listAdapter = AuthorAdapter(context, this)
         this.recyclerView = view.findViewById<RecyclerView>(R.id.list);
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = AuthorAdapter(context,authorItemInteractionListener)
+            adapter = listAdapter
         }
         errorText = view.findViewById(R.id.errorText)
         progressView = view.findViewById(R.id.progressBar)
@@ -62,7 +68,7 @@ class AuthorListFrament : DaggerFragment() {
 
         mViewModel.getAuthorsList().observe(
                 this,
-                Observer {resource ->
+                Observer { resource ->
                     when (resource.status) {
                         Status.LOADING -> {
                             errorText.visibility = View.GONE
@@ -77,6 +83,7 @@ class AuthorListFrament : DaggerFragment() {
                             resource.data?.let {
                                 (recyclerView.adapter as AuthorAdapter).setmValues(it)
                                 recyclerView.adapter?.notifyDataSetChanged()
+                                mViewModel.onAuthorSelected(it.get(0))
                             }
 
                         }
@@ -91,6 +98,10 @@ class AuthorListFrament : DaggerFragment() {
         )
     }
 
+    override fun onAuthorSelected(author: Author, poistion: Int) {
+        mViewModel.onAuthorSelected(author)
+        authorItemInteractionListener.onAuthorSelected(author,poistion)
+    }
 
     companion object {
 
@@ -98,7 +109,5 @@ class AuthorListFrament : DaggerFragment() {
 
     }
 
-    interface AuthorItemInteractionListener{
-        fun onAuthorSelected(author: Author, poistion: Int )
-    }
+
 }

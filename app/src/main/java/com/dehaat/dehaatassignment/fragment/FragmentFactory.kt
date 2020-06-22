@@ -25,4 +25,12 @@ object FragmentFactory {
         return fragment as BookListFragment
     }
 
+    fun getBookListFrament(supportFragmentManager: androidx.fragment.app.FragmentManager): BookListFragment {
+        var fragment = supportFragmentManager.findFragmentByTag(BookListFragment.FRAGMENT_NAME)
+        if (fragment == null) {
+            fragment = BookListFragment()
+        }
+        return fragment as BookListFragment
+    }
+
 }

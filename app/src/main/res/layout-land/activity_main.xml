@@ -5,10 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".activity.MainActivity">
-    <fragment
-        android:id="@+id/authorFragment"
-        android:name="com.dehaat.dehaatassignment.fragment.AuthorListFrament"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
+    <FrameLayout
+        android:id="@+id/authorFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/bookFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 </LinearLayout>
