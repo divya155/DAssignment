@@ -59,8 +59,8 @@ class AuthorListFrament : DaggerFragment() {
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel.getAuthorsList()
-        mViewModel.authorsLiveData.observe(
+
+        mViewModel.getAuthorsList().observe(
                 this,
                 Observer {resource ->
                     when (resource.status) {
