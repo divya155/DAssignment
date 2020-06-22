@@ -33,11 +33,10 @@ class BookListFragment : DaggerFragment() {
         this.recyclerView = view.findViewById<RecyclerView>(R.id.list);
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
-            adapter = BookAdapter(context).apply {  }
-
+            adapter = BookAdapter(context)
         }
 
-
+        (recyclerView.adapter as BookAdapter).setmValues(author?.books)
         return view
     }
 
